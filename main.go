@@ -2,6 +2,7 @@ package main
 
 import (
 	"flag"
+	"fmt"
 	"io"
 	"io/ioutil"
 	"log"
@@ -13,7 +14,7 @@ import (
 	"github.com/atotto/clipboard"
 )
 
-var socket = flag.String("s", "/tmp/clipservice.sock", "domain socket file")
+var socket = flag.String("s", fmt.Sprintf("%s/clipservice.sock", os.TempDir()), "domain socket file")
 var server = flag.Bool("S", false, "is server?")
 
 func serve(c net.Conn) {
