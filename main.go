@@ -44,6 +44,8 @@ func main() {
 		return
 	}
 
+	clipboard.Primary = false
+
 	syscall.Unlink(*socket)
 	ln, err := net.Listen("unix", *socket)
 	if err != nil {
