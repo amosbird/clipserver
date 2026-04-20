@@ -14,7 +14,14 @@ import (
 	"github.com/atotto/clipboard"
 )
 
-var socket = flag.String("s", fmt.Sprintf("%s/clipservice.sock", os.TempDir()), "domain socket file")
+var socket = flag.String("s", defaultSocket(), "domain socket file")
+
+func defaultSocket() string {
+	if s := os.Getenv("CLIPSERVICE_SOCK"); s != "" {
+		return s
+	}
+	return fmt.Sprintf("%s/clipservice.sock", os.TempDir())
+}
 var server = flag.Bool("S", false, "is server?")
 
 func serve(c net.Conn) {
